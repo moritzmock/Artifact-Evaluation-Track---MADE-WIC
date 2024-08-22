@@ -2,3 +2,6 @@
 /MADE-WIC
 .DS_Store
 .idea
+env
+devign.json
+qemu
