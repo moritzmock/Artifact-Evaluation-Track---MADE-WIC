@@ -57,6 +57,7 @@ docker rm aet_c
 docker rmi aet
 ```
 
+# Paper
 
 This repository contains the data used for the Artifact Evaluation Track of ASE for the paper `MADE-WIC: Multiple Annotated Datasets for Exploring Weaknesses In Code` which is accepted at the ASE'24 Tool and Demonstration Track. The preprint is already [available](https://arxiv.org/abs/2408.05163).
 
