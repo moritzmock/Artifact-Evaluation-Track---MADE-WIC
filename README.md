@@ -58,4 +58,16 @@ docker rmi aet
 ```
 
 
-This repository contains the data used for the Artifact Evaluation Track of ASE for the paper `MADE-WIC: Multiple Annotated Datasets for Exploring Weaknesses In Code` which is accepted at the ASE'24 Tool and Demonstration Track. The preprint is 
+This repository contains the data used for the Artifact Evaluation Track of ASE for the paper `MADE-WIC: Multiple Annotated Datasets for Exploring Weaknesses In Code` which is accepted at the ASE'24 Tool and Demonstration Track. The preprint is already [available](https://arxiv.org/abs/2408.05163).
+
+```bibtex
+@misc{mock2024madewicmultipleannotateddatasets,
+      title={MADE-WIC: Multiple Annotated Datasets for Exploring Weaknesses In Code}, 
+      author={Moritz Mock and Jorge Melegati and Max Kretschmann and Nicolás E. Díaz Ferreyra and Barbara Russo},
+      year={2024},
+      eprint={2408.05163},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2408.05163}, 
+}
+```
