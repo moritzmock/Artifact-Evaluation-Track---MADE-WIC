@@ -39,6 +39,7 @@ RUN apt-get install -f -y
 # install nodejsv16
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt install -y nodejs
+RUN apt install -y nano
 
 # TODO uncomment the following line at the end
 ## Download the replication package
@@ -68,8 +69,44 @@ COPY devign_sample.json /MADE-WIC/Replication/extending-datasets/data/devign.jso
 WORKDIR /MADE-WIC/Replication/extending-datasets
 RUN . env/bin/activate && python3 main.py -i data/devign.json -o ../devign_made-wic.csv
 
-WORKDIR /MADE-WIC/Replication/weaksatd-annotation
+WORKDIR /MADE-WIC/Replication/OSPR-extraction-and-weaksatd-annotation
+COPY chromium_sample /MADE-WIC/Replication/OSPR-extraction-and-weaksatd-annotation/chromiumMining/chromium
 
 RUN npm ci
-# TODO fix code before continue
-#RUN npm run mineProjects
+
+RUN npm run mineProjects chromium
+
+RUN . ../extending-datasets/env/bin/activate && python3 mergeFiles.py
+
+# remove duplicates
+
+# annotate OSPR
+RUN . ../extending-datasets/env/bin/activate && python3 annotateForSATD.py --input-path . --output-path . --filename-output OSRP-complete
+RUN npm run annotateForVulnerabilities OSRP-complete.csv 1 1 OSRP-final.csv
+
+# annotate DEVIGN
+RUN . ../extending-datasets/env/bin/activate && python3 annotateForSATD.py --input-path .. --output-path . --filename-input  devign_made-wic --filename-output Devign-complete
+RUN npm run annotateForVulnerabilities Devign-complete.csv 1 1 Devign-final.csv
+
+# install pmd
+WORKDIR /
+RUN wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F7.4.0/pmd-dist-7.4.0-bin.zip
+RUN unzip pmd-dist-7.4.0-bin.zip
+RUN apt install -y openjdk-11-jre
+
+WORKDIR /MADE-WIC/Replication/OSPR-extraction-and-weaksatd-annotation
+
+RUN rm ../*.csv
+RUN cp OSRP-final.csv ../OSPR_made-wic.csv
+RUN cp Devign-final.csv ../Devign_made-wic.csv
+
+WORKDIR /MADE-WIC/Replication
+
+WORKDIR /MADE-WIC/Replication/remove_duplicates
+RUN . ../extending-datasets/env/bin/activate && python extract_functions_into_single_files.py --path ..
+RUN /pmd-bin-7.4.0/bin/pmd cpd --dir dataset/extracted_projects/Chromium_OSRP --minimum-tokens 30 --language cpp --format csv --skip-lexical-errors true --no-fail-on-violation --ignore-literal-sequences --ignore-sequences > Chromium_OSRP.csv
+RUN /pmd-bin-7.4.0/bin/pmd cpd --dir dataset/extracted_projects/qemu_devign --minimum-tokens 30 --language cpp --format csv --skip-lexical-errors true --no-fail-on-violation --ignore-literal-sequences --ignore-sequences > qemu_devign.csv
+RUN . ../extending-datasets/env/bin/activate && python3 extract_files_code_duplication_overlapping.py --path .
+RUN . ../extending-datasets/env/bin/activate && python3 fix_column_order.py --path ..
+
+WORKDIR /MADE-WIC/Replication
