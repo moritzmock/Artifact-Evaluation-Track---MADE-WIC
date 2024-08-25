@@ -42,7 +42,7 @@ RUN apt install -y nodejs
 RUN apt install -y nano
 
 # Download the replication package
-RUN curl -L 'https://zenodo.org/records/12567874/files/MADE-WIC.zip?download=1' -o MADE-WIC.zip
+RUN curl -L 'https://zenodo.org/api/records/13370805/files-archive' -o MADE-WIC.zip
 RUN unzip MADE-WIC.zip -d MADE-WIC
 RUN rm MADE-WIC.zip
 
