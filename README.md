@@ -2,7 +2,7 @@
 
 ## Setup
 
-With the following commands the evaluation of the replication package needs to be setup.
+With the following commands, the evaluation of the replication package needs to be set up.
 
 ```
 git@github.com:moritzmock/Artifact-Evaluation-Track---MADE-WIC.git
@@ -37,7 +37,7 @@ python extract_data_OSPR.py --path-repo chromium --path-dataset MADE-WIC/Dateset
 ## Docker 
 
 It is assumed that Docker is up and running at the local machine.
-With the following command the process can be started.
+With the following command, the process can be started.
 
 ```
 docker build -t aet . && docker run --name aet_c aet
@@ -50,7 +50,7 @@ docker cp aet_c:/MADE-WIC/Replication/Devign_made-wic.csv .
 docker cp aet_c:/MADE-WIC/Replication/OSPR_made-wic.csv .
 ```
 
-And lastly the created image and container can be deleted with the commands
+And lastly, the created image and container can be deleted with the commands.
 
 ```
 docker rm aet_c
@@ -59,7 +59,7 @@ docker rmi aet
 
 # Paper
 
-This repository contains the data used for the Artifact Evaluation Track of ASE for the paper `MADE-WIC: Multiple Annotated Datasets for Exploring Weaknesses In Code` which is accepted at the ASE'24 Tool and Demonstration Track. The preprint is already [available](https://arxiv.org/abs/2408.05163).
+This repository contains the data used for the Artifact Evaluation Track of ASE for the paper `MADE-WIC: Multiple Annotated Datasets for Exploring Weaknesses In Code` accepted at the ASE'24 Tool and Demonstration Track. The preprint is already [available](https://arxiv.org/abs/2408.05163); the replication package of the work is available at [Zenodo](https://zenodo.org/records/12567874).
 
 ```bibtex
 @misc{mock2024madewicmultipleannotateddatasets,
