@@ -41,14 +41,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt install -y nodejs
 RUN apt install -y nano
 
-# TODO uncomment the following line at the end
-## Download the replication package
-#RUN curl -L 'https://zenodo.org/records/12567874/files/MADE-WIC.zip?download=1' -o MADE-WIC.zip
-#RUN unzip MADE-WIC.zip -d MADE-WIC
-#RUN rm MADE-WIC.zip
-
-# TODO remove the following line at the end
-COPY MADE-WIC MADE-WIC
+# Download the replication package
+RUN curl -L 'https://zenodo.org/records/12567874/files/MADE-WIC.zip?download=1' -o MADE-WIC.zip
+RUN unzip MADE-WIC.zip -d MADE-WIC
+RUN rm MADE-WIC.zip
 
 # Extending the datasets
 WORKDIR /MADE-WIC/Replication/extending-datasets

@@ -7,7 +7,7 @@ With the following commands the evaluation of the replication package needs to b
 ```
 git@github.com:moritzmock/Artifact-Evaluation-Track---MADE-WIC.git
 cd Artifact-Evaluation-Track---MADE-WIC
-curl -L "https://zenodo.org/records/12567874/files/MADE-WIC.zip?download=1" -o "MADE-WIC.zip"
+curl -L "https://zenodo.org/api/records/12567874/files-archive" -o "MADE-WIC.zip"
 unzip MADE-WIC.zip
 ```
 
