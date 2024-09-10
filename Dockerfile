@@ -43,8 +43,10 @@ RUN apt install -y nano
 
 # Download the replication package
 RUN curl -L 'https://zenodo.org/api/records/13370805/files-archive' -o MADE-WIC.zip
-RUN unzip MADE-WIC.zip -d MADE-WIC
+RUN unzip MADE-WIC.zip -d MADE-WIC-original
+RUN unzip MADE-WIC-original/MADE-WIC.zip -d .
 RUN rm MADE-WIC.zip
+RUN rm -r MADE-WIC-original
 
 # Extending the datasets
 WORKDIR /MADE-WIC/Replication/extending-datasets
